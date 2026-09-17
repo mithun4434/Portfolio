@@ -1,4 +1,4 @@
-# S. Mithun — Neo-Brutalist Portfolio
+# S. Mithun — Portfolio
 
 A responsive React + Vite + TypeScript + Tailwind CSS portfolio built to the supplied Neo-Brutalism design specification.
 

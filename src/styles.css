@@ -867,3 +867,40 @@ section:nth-of-type(odd) {
     transition: none !important;
   }
 }
+
+
+.neo-input {
+  width: 100%;
+  min-height: 56px;
+  border: 4px solid #000;
+  border-radius: 0;
+  background: #FFFDF5;
+  color: #000;
+  padding: 12px 14px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  outline: none;
+  transition: background-color 100ms linear, box-shadow 100ms linear, transform 100ms linear;
+}
+
+.neo-input::placeholder {
+  color: #000;
+  opacity: .48;
+}
+
+.neo-input:focus {
+  background: #FFD93D;
+  box-shadow: 5px 5px 0 #000;
+  transform: translate(-2px, -2px);
+}
+
+textarea.neo-input {
+  min-height: 150px;
+}
+
+@media (max-width: 640px) {
+  .neo-input {
+    min-height: 52px;
+  }
+}

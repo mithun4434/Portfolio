@@ -70,6 +70,29 @@ const skills = [
 ];
 
 function BrutalistBot() {
+  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
+    setContactFields((current) => ({ ...current, [field]: value }));
+    setContactStatus("");
+  };
+
+  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { name, email, subject, message } = contactFields;
+    const recipient = "mithunsmb12@gmail.com";
+    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
+    const body = [
+      `Name: ${name.trim()}`,
+      `Email: ${email.trim()}`,
+      "",
+      message.trim(),
+    ].join("\n");
+
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setContactStatus("YOUR EMAIL APP IS OPENING...");
+  };
+
   return (
     <svg viewBox="0 0 260 220" className="asset-bot" role="img" aria-label="Illustrated developer robot">
       <g stroke="#000" strokeWidth="6" strokeLinejoin="round">
@@ -90,6 +113,29 @@ function BrutalistBot() {
 
 
 function SectionMarker({ number, word }: { number: string; word: string }) {
+  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
+    setContactFields((current) => ({ ...current, [field]: value }));
+    setContactStatus("");
+  };
+
+  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { name, email, subject, message } = contactFields;
+    const recipient = "mithunsmb12@gmail.com";
+    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
+    const body = [
+      `Name: ${name.trim()}`,
+      `Email: ${email.trim()}`,
+      "",
+      message.trim(),
+    ].join("\n");
+
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setContactStatus("YOUR EMAIL APP IS OPENING...");
+  };
+
   return (
     <div className="section-marker" aria-hidden="true">
       <span>{number}</span>
@@ -99,6 +145,29 @@ function SectionMarker({ number, word }: { number: string; word: string }) {
 }
 
 function BrutalistOrbit() {
+  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
+    setContactFields((current) => ({ ...current, [field]: value }));
+    setContactStatus("");
+  };
+
+  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { name, email, subject, message } = contactFields;
+    const recipient = "mithunsmb12@gmail.com";
+    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
+    const body = [
+      `Name: ${name.trim()}`,
+      `Email: ${email.trim()}`,
+      "",
+      message.trim(),
+    ].join("\n");
+
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setContactStatus("YOUR EMAIL APP IS OPENING...");
+  };
+
   return (
     <svg className="asset-orbit" viewBox="0 0 240 180" role="img" aria-label="Abstract orbit illustration">
       <g fill="none" stroke="#000" strokeWidth="6">
@@ -136,6 +205,29 @@ function CustomCursor() {
     };
   }, []);
 
+  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
+    setContactFields((current) => ({ ...current, [field]: value }));
+    setContactStatus("");
+  };
+
+  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { name, email, subject, message } = contactFields;
+    const recipient = "mithunsmb12@gmail.com";
+    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
+    const body = [
+      `Name: ${name.trim()}`,
+      `Email: ${email.trim()}`,
+      "",
+      message.trim(),
+    ].join("\n");
+
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setContactStatus("YOUR EMAIL APP IS OPENING...");
+  };
+
   return (
     <div
       className={`custom-cursor ${cursor.hover ? "is-hovering" : ""} ${cursor.click ? "is-clicking" : ""}`}
@@ -157,6 +249,13 @@ function CustomCursor() {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const [contactStatus, setContactStatus] = useState("");
+  const [contactFields, setContactFields] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -196,6 +295,29 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
+    setContactFields((current) => ({ ...current, [field]: value }));
+    setContactStatus("");
+  };
+
+  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { name, email, subject, message } = contactFields;
+    const recipient = "mithunsmb12@gmail.com";
+    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
+    const body = [
+      `Name: ${name.trim()}`,
+      `Email: ${email.trim()}`,
+      "",
+      message.trim(),
+    ].join("\n");
+
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setContactStatus("YOUR EMAIL APP IS OPENING...");
+  };
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-neo-canvas font-grotesk text-neo-ink">
       <CustomCursor />
@@ -214,7 +336,30 @@ function App() {
           <nav className="hidden items-center gap-2 md:flex" aria-label="Primary navigation">
             {["ABOUT", "PROJECTS", "STACK", "CONTACT"].map((item, index) => {
               const id = item.toLowerCase();
-              return (
+              const handleContactChange = (field: keyof typeof contactFields, value: string) => {
+    setContactFields((current) => ({ ...current, [field]: value }));
+    setContactStatus("");
+  };
+
+  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { name, email, subject, message } = contactFields;
+    const recipient = "mithunsmb12@gmail.com";
+    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
+    const body = [
+      `Name: ${name.trim()}`,
+      `Email: ${email.trim()}`,
+      "",
+      message.trim(),
+    ].join("\n");
+
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setContactStatus("YOUR EMAIL APP IS OPENING...");
+  };
+
+  return (
                 <a
                   key={item}
                   href={`#${id}`}
@@ -540,20 +685,97 @@ $ status
                 I&apos;m always interested in building, learning and experimenting. Find me online or start a conversation.
               </p>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <a className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-4 py-4 font-black uppercase shadow-neo-sm" href="https://github.com/mithun4434" target="_blank" rel="noreferrer">
                   <Github strokeWidth={4} /> GITHUB
                 </a>
-                <a className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-4 py-4 font-black uppercase shadow-neo-sm" href="https://www.linkedin.com/in/mithun-s-36505b381/" target="_blank" rel="noreferrer">
+                <a className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-4 py-4 font-black uppercase shadow-neo-sm" href="https://www.linkedin.com/in/mithun-s-12-pro" target="_blank" rel="noreferrer">
                   <Linkedin strokeWidth={4} /> LINKEDIN
                 </a>
-                <a className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-4 py-4 font-black uppercase shadow-neo-sm" href="mailto:hello@example.com">
-                  <Mail strokeWidth={4} /> EMAIL
-                </a>
-                <a className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-4 py-4 font-black uppercase shadow-neo-sm" href="#top">
-                  <ArrowUpRight strokeWidth={4} /> TOP
+                <a className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-4 py-4 font-black uppercase shadow-neo-sm" href="mailto:mithunsmb12@gmail.com">
+                  <Mail strokeWidth={4} /> DIRECT EMAIL
                 </a>
               </div>
+
+              <form onSubmit={handleContactSubmit} className="mt-12 border-4 border-black bg-white p-6 text-black shadow-neo-xl sm:p-8">
+                <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <p className="font-black uppercase tracking-widest">CONTACT TERMINAL</p>
+                    <h3 className="mt-2 text-3xl font-black uppercase">SEND ME A MESSAGE</h3>
+                  </div>
+                  <span className="border-4 border-black bg-neo-accent px-3 py-2 text-xs font-black uppercase tracking-widest shadow-neo-sm">
+                    TO: MITHUNSMB12@GMAIL.COM
+                  </span>
+                </div>
+
+                <div className="grid gap-5 md:grid-cols-2">
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-black uppercase tracking-widest">YOUR NAME</span>
+                    <input
+                      required
+                      type="text"
+                      value={contactFields.name}
+                      onChange={(e) => handleContactChange("name", e.target.value)}
+                      placeholder="YOUR NAME"
+                      className="neo-input"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-black uppercase tracking-widest">YOUR EMAIL</span>
+                    <input
+                      required
+                      type="email"
+                      value={contactFields.email}
+                      onChange={(e) => handleContactChange("email", e.target.value)}
+                      placeholder="YOU@EMAIL.COM"
+                      className="neo-input"
+                    />
+                  </label>
+                </div>
+
+                <label className="mt-5 block">
+                  <span className="mb-2 block text-sm font-black uppercase tracking-widest">SUBJECT</span>
+                  <input
+                    type="text"
+                    value={contactFields.subject}
+                    onChange={(e) => handleContactChange("subject", e.target.value)}
+                    placeholder="WHAT DO YOU WANT TO BUILD?"
+                    className="neo-input"
+                  />
+                </label>
+
+                <label className="mt-5 block">
+                  <span className="mb-2 block text-sm font-black uppercase tracking-widest">MESSAGE</span>
+                  <textarea
+                    required
+                    rows={6}
+                    value={contactFields.message}
+                    onChange={(e) => handleContactChange("message", e.target.value)}
+                    placeholder="WRITE YOUR MESSAGE..."
+                    className="neo-input resize-y py-4"
+                  />
+                </label>
+
+                <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm font-black uppercase tracking-wide">
+                    YOUR DETAILS STAY IN YOUR EMAIL APP — THIS FORM OPENS A PRE-FILLED EMAIL.
+                  </p>
+                  <button type="submit" className="neo-button flex min-h-14 items-center justify-center gap-3 bg-neo-accent px-7 py-4 font-black uppercase tracking-wide shadow-neo-sm">
+                    SEND MESSAGE <Mail strokeWidth={4} />
+                  </button>
+                </div>
+
+                {contactStatus && (
+                  <div className="mt-5 border-4 border-black bg-neo-secondary p-4 font-black uppercase tracking-wide">
+                    {contactStatus}
+                  </div>
+                )}
+              </form>
+
+              <a className="neo-button mt-6 inline-flex min-h-12 items-center justify-center gap-3 bg-black px-5 py-3 font-black uppercase tracking-wide text-white shadow-neo-sm" href="#top">
+                <ArrowUpRight strokeWidth={4} /> BACK TO TOP
+              </a>
             </div>
           </div>
         </section>
@@ -567,7 +789,7 @@ $ status
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <span className="border-4 border-white bg-neo-accent px-4 py-3 font-black text-black">© 2026</span>
-            <span className="border-4 border-white bg-neo-secondary px-4 py-3 font-black text-black">MADE WITH REACT</span>
+            <span className="border-4 border-white bg-neo-secondary px-4 py-3 font-black text-black">BUILT BY MITHUN</span>
           </div>
         </div>
       </footer>

@@ -1,11 +1,9 @@
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   Code2,
   Github,
   GraduationCap,
-  Instagram,
   Linkedin,
   Mail,
   Menu,
@@ -22,6 +20,7 @@ import {
   CircleDot,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 
 const projects = [
   {
@@ -69,73 +68,42 @@ const skills = [
   ["TOOLS", "Git", "GitHub", "Supabase", "Docker", "VS Code"],
 ];
 
-function BrutalistBot() {
-  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
-    setContactFields((current) => ({ ...current, [field]: value }));
-    setContactStatus("");
-  };
-
-  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const { name, email, subject, message } = contactFields;
-    const recipient = "mithunsmb12@gmail.com";
-    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
-    const body = [
-      `Name: ${name.trim()}`,
-      `Email: ${email.trim()}`,
-      "",
-      message.trim(),
-    ].join("\n");
-
-    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setContactStatus("YOUR EMAIL APP IS OPENING...");
-  };
-
+function BrutalistBot({
+  active,
+  onActivate,
+}: {
+  active: boolean;
+  onActivate: () => void;
+}) {
   return (
-    <svg viewBox="0 0 260 220" className="asset-bot" role="img" aria-label="Illustrated developer robot">
-      <g stroke="#000" strokeWidth="6" strokeLinejoin="round">
-        <path d="M130 18v24" />
-        <circle cx="130" cy="12" r="7" fill="#FF6B6B" />
-        <rect x="35" y="42" width="190" height="125" fill="#C4B5FD" />
-        <rect x="58" y="68" width="56" height="42" fill="#FFD93D" />
-        <rect x="146" y="68" width="56" height="42" fill="#FFD93D" />
-        <circle cx="86" cy="89" r="8" fill="#000" />
-        <circle cx="174" cy="89" r="8" fill="#000" />
-        <path d="M83 132h94" />
-        <path d="M48 170v25M212 170v25M18 94h17M225 94h17" />
-        <rect x="85" y="168" width="90" height="30" fill="#FF6B6B" />
-      </g>
-    </svg>
+    <button
+      type="button"
+      className={`hero-bot-button ${active ? "is-active" : ""}`}
+      onClick={onActivate}
+      aria-pressed={active}
+      aria-label={active ? "Turn AI mode off" : "Turn AI mode on"}
+      title={active ? "AI MODE: ON" : "CLICK ROBOT TO ACTIVATE AI MODE"}
+    >
+      <svg viewBox="0 0 260 220" className="asset-bot" role="img" aria-hidden="true">
+        <g stroke="#000" strokeWidth="6" strokeLinejoin="round">
+          <path d="M130 18v24" />
+          <circle cx="130" cy="12" r="7" fill="#FF6B6B" />
+          <rect x="35" y="42" width="190" height="125" fill="#C4B5FD" />
+          <rect x="58" y="68" width="56" height="42" fill="#FFD93D" />
+          <rect x="146" y="68" width="56" height="42" fill="#FFD93D" />
+          <circle cx="86" cy="89" r="8" fill="#000" />
+          <circle cx="174" cy="89" r="8" fill="#000" />
+          <path d="M83 132h94" />
+          <path d="M48 170v25M212 170v25M18 94h17M225 94h17" />
+          <rect x="85" y="168" width="90" height="30" fill="#FF6B6B" />
+        </g>
+      </svg>
+      <span className="bot-label">{active ? "AI ONLINE" : "CLICK ME"}</span>
+    </button>
   );
 }
 
-
 function SectionMarker({ number, word }: { number: string; word: string }) {
-  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
-    setContactFields((current) => ({ ...current, [field]: value }));
-    setContactStatus("");
-  };
-
-  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const { name, email, subject, message } = contactFields;
-    const recipient = "mithunsmb12@gmail.com";
-    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
-    const body = [
-      `Name: ${name.trim()}`,
-      `Email: ${email.trim()}`,
-      "",
-      message.trim(),
-    ].join("\n");
-
-    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setContactStatus("YOUR EMAIL APP IS OPENING...");
-  };
-
   return (
     <div className="section-marker" aria-hidden="true">
       <span>{number}</span>
@@ -145,29 +113,6 @@ function SectionMarker({ number, word }: { number: string; word: string }) {
 }
 
 function BrutalistOrbit() {
-  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
-    setContactFields((current) => ({ ...current, [field]: value }));
-    setContactStatus("");
-  };
-
-  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const { name, email, subject, message } = contactFields;
-    const recipient = "mithunsmb12@gmail.com";
-    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
-    const body = [
-      `Name: ${name.trim()}`,
-      `Email: ${email.trim()}`,
-      "",
-      message.trim(),
-    ].join("\n");
-
-    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setContactStatus("YOUR EMAIL APP IS OPENING...");
-  };
-
   return (
     <svg className="asset-orbit" viewBox="0 0 240 180" role="img" aria-label="Abstract orbit illustration">
       <g fill="none" stroke="#000" strokeWidth="6">
@@ -181,56 +126,36 @@ function BrutalistOrbit() {
   );
 }
 
-
 function CustomCursor() {
   const [cursor, setCursor] = useState({ x: -100, y: -100, hover: false, click: false });
 
   useEffect(() => {
-    const move = (event: MouseEvent) => setCursor((c) => ({ ...c, x: event.clientX, y: event.clientY }));
+    const move = (event: MouseEvent) =>
+      setCursor((c) => ({ ...c, x: event.clientX, y: event.clientY }));
     const over = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;
-      setCursor((c) => ({ ...c, hover: Boolean(target?.closest("a, button, .pop-card")) }));
+      setCursor((c) => ({
+        ...c,
+        hover: Boolean(target?.closest('a, button, .pop-card, .interactive-tile')),
+      }));
     };
     const down = () => setCursor((c) => ({ ...c, click: true }));
     const up = () => setCursor((c) => ({ ...c, click: false }));
-    window.addEventListener("mousemove", move);
-    document.addEventListener("mouseover", over);
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
+    window.addEventListener('mousemove', move);
+    document.addEventListener('mouseover', over);
+    window.addEventListener('mousedown', down);
+    window.addEventListener('mouseup', up);
     return () => {
-      window.removeEventListener("mousemove", move);
-      document.removeEventListener("mouseover", over);
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
+      window.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseover', over);
+      window.removeEventListener('mousedown', down);
+      window.removeEventListener('mouseup', up);
     };
   }, []);
 
-  const handleContactChange = (field: keyof typeof contactFields, value: string) => {
-    setContactFields((current) => ({ ...current, [field]: value }));
-    setContactStatus("");
-  };
-
-  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const { name, email, subject, message } = contactFields;
-    const recipient = "mithunsmb12@gmail.com";
-    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
-    const body = [
-      `Name: ${name.trim()}`,
-      `Email: ${email.trim()}`,
-      "",
-      message.trim(),
-    ].join("\n");
-
-    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setContactStatus("YOUR EMAIL APP IS OPENING...");
-  };
-
   return (
     <div
-      className={`custom-cursor ${cursor.hover ? "is-hovering" : ""} ${cursor.click ? "is-clicking" : ""}`}
+      className={`custom-cursor ${cursor.hover ? 'is-hovering' : ''} ${cursor.click ? 'is-clicking' : ''}`}
       style={{ left: cursor.x, top: cursor.y }}
       aria-hidden="true"
     >
@@ -250,6 +175,8 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [contactStatus, setContactStatus] = useState("");
+  const [cvOpen, setCvOpen] = useState(false);
+  const [aiMode, setAiMode] = useState(false);
   const [contactFields, setContactFields] = useState({
     name: "",
     email: "",
@@ -300,7 +227,7 @@ function App() {
     setContactStatus("");
   };
 
-  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const { name, email, subject, message } = contactFields;
@@ -323,6 +250,58 @@ function App() {
       <CustomCursor />
       <div className="site-noise pointer-events-none fixed inset-0 z-50" aria-hidden="true" />
 
+      {cvOpen && (
+        <div
+          className="cv-overlay fixed inset-0 z-[100] flex items-center justify-center bg-black/80 px-4 py-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cv-title"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setCvOpen(false);
+          }}
+        >
+          <div className="cv-modal relative max-h-[90vh] w-full max-w-4xl overflow-y-auto border-4 border-black bg-neo-canvas p-5 text-black shadow-neo-xl sm:p-8">
+            <button
+              type="button"
+              onClick={() => setCvOpen(false)}
+              className="neo-button absolute right-4 top-4 flex h-12 w-12 items-center justify-center bg-neo-accent shadow-neo-sm"
+              aria-label="Close CV"
+            >
+              <X strokeWidth={4} />
+            </button>
+            <div className="pr-16">
+              <p className="section-label bg-neo-secondary">MITHUN S / CV</p>
+              <h2 id="cv-title" className="mt-6 text-5xl font-black uppercase leading-[.85] tracking-tighter sm:text-7xl">MITHUN S</h2>
+              <p className="mt-3 text-xl font-black uppercase tracking-widest">CSE STUDENT • DEVELOPER • AI BUILDER • GAME DEV ENTHUSIAST</p>
+            </div>
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
+              <section className="border-4 border-black bg-white p-5 shadow-neo-sm">
+                <p className="font-black uppercase tracking-widest">PROFILE</p>
+                <p className="mt-3 font-bold leading-relaxed">BE Computer Science & Engineering student focused on software development, computer vision, AI systems, UI design and game development.</p>
+              </section>
+              <section className="border-4 border-black bg-neo-secondary p-5 shadow-neo-sm">
+                <p className="font-black uppercase tracking-widest">EDUCATION</p>
+                <h3 className="mt-3 text-2xl font-black uppercase">BE — CSE</h3>
+                <p className="mt-1 font-bold">K. Ramakrishna College of Technology</p>
+              </section>
+              <section className="border-4 border-black bg-neo-accent p-5 shadow-neo-sm">
+                <p className="font-black uppercase tracking-widest">CORE SKILLS</p>
+                <p className="mt-3 font-bold leading-relaxed">C • Java • Python • JavaScript • TypeScript • React • Vite • Tailwind CSS • OpenCV • YOLO • PyTorch • LLMs • Git • GitHub • Supabase • Docker</p>
+              </section>
+              <section className="border-4 border-black bg-neo-muted p-5 shadow-neo-sm">
+                <p className="font-black uppercase tracking-widest">SELECTED BUILDS</p>
+                <p className="mt-3 font-bold leading-relaxed">AgriVision • BorderGuard AI • RoadSOS • Calc-it</p>
+              </section>
+            </div>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+              <a href="https://github.com/mithun4434" target="_blank" rel="noreferrer" className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-6 py-4 font-black uppercase shadow-neo-sm"><Github strokeWidth={4} /> GITHUB</a>
+              <a href="https://www.linkedin.com/in/mithun-s-12-pro" target="_blank" rel="noreferrer" className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-6 py-4 font-black uppercase shadow-neo-sm"><Linkedin strokeWidth={4} /> LINKEDIN</a>
+              <button type="button" onClick={() => setCvOpen(false)} className="neo-button flex min-h-14 items-center justify-center gap-3 bg-black px-6 py-4 font-black uppercase text-white shadow-neo-sm">CLOSE CV <X strokeWidth={4} /></button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <header className="sticky top-0 z-40 border-b-4 border-black bg-neo-canvas">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <a
@@ -341,7 +320,7 @@ function App() {
     setContactStatus("");
   };
 
-  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const { name, email, subject, message } = contactFields;
@@ -413,16 +392,23 @@ function App() {
 
               <div className="motion-fade-up mt-10 max-w-2xl border-4 border-black bg-white p-6 text-lg font-bold leading-relaxed shadow-neo-lg sm:text-xl">
                 <p>
-                  Hi, I&apos;m <span className="bg-neo-secondary px-1">S. Mithun</span> —
+                  Hi, I&apos;m <span className="bg-neo-secondary px-1">MITHUN S</span> —
                   a Computer Science student who likes turning ideas into
                   interfaces, experiments, AI systems and games.
                 </p>
               </div>
 
-              <div className="motion-fade-up mt-9 flex flex-col gap-4 sm:flex-row">
+              <div className="motion-fade-up mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <a href="#projects" className="neo-button flex min-h-14 items-center justify-center gap-3 bg-neo-accent px-7 py-4 font-black uppercase tracking-wide shadow-neo-sm">
                   SEE MY WORK <ArrowRight strokeWidth={4} />
                 </a>
+                <button
+                  type="button"
+                  onClick={() => setCvOpen(true)}
+                  className="neo-button flex min-h-14 items-center justify-center gap-3 bg-neo-secondary px-7 py-4 font-black uppercase tracking-wide shadow-neo-sm"
+                >
+                  VIEW MY CV <GraduationCap strokeWidth={4} />
+                </button>
                 <a href="#contact" className="neo-button flex min-h-14 items-center justify-center gap-3 bg-white px-7 py-4 font-black uppercase tracking-wide shadow-neo-sm">
                   LET&apos;S TALK <ArrowUpRight strokeWidth={4} />
                 </a>
@@ -441,14 +427,30 @@ function App() {
                   <span className="font-black uppercase tracking-widest">MITHUN.EXE</span>
                   <Terminal strokeWidth={4} />
                 </div>
-                <pre className="overflow-hidden text-sm font-bold leading-7 text-white sm:text-base">
-{`$ whoami
+                <pre className="hero-terminal-output overflow-hidden text-sm font-bold leading-7 text-white sm:text-base">
+{aiMode
+  ? `$ whoami
+> MITHUN S
+$ mode
+> AI SYSTEMS: ONLINE
+$ stack
+> VISION + LLM + WEB
+$ status
+> BUILDING... ██████████`
+  : `$ whoami
 > developer
 $ focus
 > AI + WEB + GAMES
 $ status
 > BUILDING... ████████`}
                 </pre>
+                <div className="mt-5 flex items-center justify-between gap-3 border-4 border-white bg-neo-secondary px-3 py-2 text-xs font-black uppercase text-black">
+                  <span>{aiMode ? "AI MODE ACTIVE" : "CLICK THE ROBOT"}</span>
+                  <span className="inline-flex items-center gap-2">
+                    <span className={`status-dot ${aiMode ? "is-on" : ""}`} />
+                    {aiMode ? "ONLINE" : "STANDBY"}
+                  </span>
+                </div>
               </div>
 
               <div className="motion-stamp absolute bottom-16 right-0 z-20 -rotate-3 border-4 border-black bg-neo-accent p-5 font-black uppercase shadow-neo-lg sm:p-7">
@@ -465,7 +467,18 @@ $ status
                 <MousePointer2 size={24} strokeWidth={4} />
                 <span>CLICK ME</span>
               </div>
-              <BrutalistBot />
+              <BrutalistBot active={aiMode} onActivate={() => setAiMode((value) => !value)} />
+
+              <button
+                type="button"
+                onClick={() => setAiMode((value) => !value)}
+                className={`interactive-tile absolute bottom-4 left-5 z-30 border-4 border-black px-4 py-3 text-left font-black uppercase shadow-neo-sm ${
+                  aiMode ? "bg-neo-secondary" : "bg-white"
+                }`}
+              >
+                <span className="block text-xs tracking-widest">INTERACTIVE</span>
+                <span className="mt-1 block text-lg leading-none">{aiMode ? "AI MODE: ON" : "TRY THE ROBOT →"}</span>
+              </button>
             </div>
           </div>
         </section>

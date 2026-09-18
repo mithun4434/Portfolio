@@ -165,7 +165,7 @@ button:focus-visible {
   }
 }
 
-/* --- Neo-brutalist motion + illustration layer --- */
+/* --- Motion + illustration layer --- */
 .sticker {
   display: flex;
   align-items: center;
@@ -177,7 +177,6 @@ button:focus-visible {
   letter-spacing: .14em;
   box-shadow: 4px 4px 0 #000;
 }
-.sticker-yellow { background: #FFD93D; }
 .sticker-white { background: #FFF; }
 
 .asset-bot {
@@ -327,7 +326,7 @@ section:nth-of-type(odd) {
 }
 
 
-/* --- Neo-Brutalist motion layer --- */
+/* --- Motion layer --- */
 @keyframes neo-fade-up {
   0% { opacity: 0; transform: translateY(28px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -958,8 +957,6 @@ textarea.neo-input {
   background: #FF6B6B;
 }
 .status-dot.is-on { background: #FFD93D; animation: status-pulse .8s steps(2, end) infinite; }
-.interactive-tile { transition: transform 100ms linear, box-shadow 100ms linear; }
-.interactive-tile:hover { transform: translate(-3px, -5px) rotate(-2deg); box-shadow: 7px 7px 0 #000; }
 .cv-overlay { backdrop-filter: none; }
 .cv-modal { animation: cv-pop 180ms cubic-bezier(.16,.9,.26,1.05) both; }
 @keyframes cv-pop {
@@ -981,5 +978,5 @@ textarea.neo-input {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-bot-button, .status-dot.is-on, .cv-modal { animation: none !important; }
-  .hero-bot-button:hover, .hero-bot-button:focus-visible, .interactive-tile:hover { transform: none; }
+  .hero-bot-button:hover, .hero-bot-button:focus-visible { transform: none; }
 }

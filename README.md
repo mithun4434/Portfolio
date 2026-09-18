@@ -1,8 +1,8 @@
-# MITHUN S — Neo-Brutalist Portfolio
+# MITHUN S — Portfolio
 
-A responsive React + Vite + TypeScript + Tailwind CSS portfolio built to the supplied Neo-Brutalism design specification.
+A responsive React + Vite + TypeScript + Tailwind CSS portfolio built around a bold, high-contrast visual design system.
 
-## Design system implemented
+## Design system
 
 - Cream canvas `#FFFDF5`
 - Pure black structure `#000000`

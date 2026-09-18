@@ -136,7 +136,7 @@ function CustomCursor() {
       const target = event.target as HTMLElement | null;
       setCursor((c) => ({
         ...c,
-        hover: Boolean(target?.closest('a, button, .pop-card, .interactive-tile')),
+        hover: Boolean(target?.closest('a, button, .pop-card')),
       }));
     };
     const down = () => setCursor((c) => ({ ...c, click: true }));
@@ -459,26 +459,12 @@ $ status
                 <div className="text-4xl leading-none sm:text-6xl">REPEAT</div>
               </div>
 
-              <div className="absolute left-0 top-0 z-30 sticker sticker-yellow float-one">
-                <Cpu size={28} strokeWidth={4} />
-                <span>AI MODE</span>
-              </div>
               <div className="absolute right-0 bottom-0 z-30 sticker sticker-white float-two">
                 <MousePointer2 size={24} strokeWidth={4} />
                 <span>CLICK ME</span>
               </div>
               <BrutalistBot active={aiMode} onActivate={() => setAiMode((value) => !value)} />
 
-              <button
-                type="button"
-                onClick={() => setAiMode((value) => !value)}
-                className={`interactive-tile absolute bottom-4 left-5 z-30 border-4 border-black px-4 py-3 text-left font-black uppercase shadow-neo-sm ${
-                  aiMode ? "bg-neo-secondary" : "bg-white"
-                }`}
-              >
-                <span className="block text-xs tracking-widest">INTERACTIVE</span>
-                <span className="mt-1 block text-lg leading-none">{aiMode ? "AI MODE: ON" : "TRY THE ROBOT →"}</span>
-              </button>
             </div>
           </div>
         </section>

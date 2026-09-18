@@ -330,7 +330,7 @@ function App() {
             onClick={closeMenu}
             className="neo-button bg-neo-accent px-4 py-2 text-lg font-black uppercase tracking-tight shadow-neo-sm"
           >
-            S.MITHUN
+            MITHUN S
           </a>
 
           <nav className="hidden items-center gap-2 md:flex" aria-label="Primary navigation">
@@ -784,7 +784,7 @@ $ status
       <footer className="border-b-4 border-black bg-black px-4 py-10 text-white sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="text-4xl font-black uppercase tracking-tighter">S.MITHUN</div>
+            <div className="text-4xl font-black uppercase tracking-tighter">MITHUN S</div>
             <p className="mt-2 font-bold uppercase tracking-widest">CODE • CREATE • REPEAT</p>
           </div>
           <div className="flex flex-wrap items-center gap-4">

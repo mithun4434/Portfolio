@@ -20,7 +20,7 @@ import {
   CircleDot,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { FormEvent } from "react";
+import type { FormEvent, MouseEvent as ReactMouseEvent } from "react";
 
 const projects = [
   {
@@ -146,7 +146,7 @@ function CustomCursor() {
       const target = event.target as HTMLElement | null;
       setCursor((c) => ({
         ...c,
-        hover: Boolean(target?.closest('a, button, .pop-card')),
+        hover: Boolean(target?.closest('a, button, [role="button"]')),
       }));
     };
     const down = () => setCursor((c) => ({ ...c, click: true }));
@@ -195,6 +195,22 @@ function App() {
   });
 
   const closeMenu = () => setMenuOpen(false);
+
+  const handleNavClick = (event: ReactMouseEvent<HTMLAnchorElement>, id: string) => {
+    event.preventDefault();
+    closeMenu();
+
+    const target = document.getElementById(id);
+    const header = document.querySelector("header");
+    if (!target) return;
+
+    const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: Math.max(0, targetTop - headerHeight),
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     const sections = Array.from(
@@ -300,7 +316,7 @@ function App() {
               </section>
               <section className="border-4 border-black bg-neo-muted p-5 shadow-neo-sm">
                 <p className="font-black uppercase tracking-widest">SELECTED BUILDS</p>
-                <p className="mt-3 font-bold leading-relaxed">AgriVision • BorderGuard AI • RoadSOS • Calc-it</p>
+                <p className="mt-3 font-bold leading-relaxed">AgriVision • BorderGuard AI • RoadSOS • Calc-it • PyLogic</p>
               </section>
             </div>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row">
@@ -325,33 +341,12 @@ function App() {
           <nav className="hidden items-center gap-2 md:flex" aria-label="Primary navigation">
             {["ABOUT", "PROJECTS", "STACK", "CONTACT"].map((item, index) => {
               const id = item.toLowerCase();
-              const handleContactChange = (field: keyof typeof contactFields, value: string) => {
-    setContactFields((current) => ({ ...current, [field]: value }));
-    setContactStatus("");
-  };
 
-  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const { name, email, subject, message } = contactFields;
-    const recipient = "mithunsmb12@gmail.com";
-    const mailSubject = subject.trim() || `Portfolio enquiry from ${name.trim() || "a visitor"}`;
-    const body = [
-      `Name: ${name.trim()}`,
-      `Email: ${email.trim()}`,
-      "",
-      message.trim(),
-    ].join("\n");
-
-    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setContactStatus("YOUR EMAIL APP IS OPENING...");
-  };
-
-  return (
+              return (
                 <a
                   key={item}
                   href={`#${id}`}
+                  onClick={(event) => handleNavClick(event, id)}
                   className={`nav-link ${activeSection === id ? "nav-link-active" : ""}`}
                   aria-current={activeSection === id ? "page" : undefined}
                 >
@@ -376,7 +371,12 @@ function App() {
           <nav className="border-t-4 border-black bg-neo-secondary p-4 md:hidden" aria-label="Mobile navigation">
             <div className="grid gap-3">
               {["ABOUT", "PROJECTS", "STACK", "CONTACT"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} onClick={closeMenu} className="neo-button bg-white px-4 py-4 text-left text-lg font-black uppercase shadow-neo-sm">
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={(event) => handleNavClick(event, item.toLowerCase())}
+                  className="neo-button bg-white px-4 py-4 text-left text-lg font-black uppercase shadow-neo-sm"
+                >
                   {item}
                 </a>
               ))}
@@ -567,19 +567,15 @@ $ status
                         </span>
                       ))}
                     </div>
-                    {project.link ? (
+                    {project.link && (
                       <a
                         href={project.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="neo-button mt-8 flex min-h-12 items-center gap-2 bg-black px-5 py-3 text-sm font-black uppercase tracking-wide text-white shadow-neo-sm"
+                        className="neo-button mt-8 inline-flex min-h-12 w-fit self-start items-center gap-2 bg-black px-5 py-3 text-sm font-black uppercase tracking-wide text-white shadow-neo-sm"
                       >
                         VIEW PROJECT <ArrowUpRight size={20} strokeWidth={4} />
                       </a>
-                    ) : (
-                      <button className="neo-button mt-8 flex min-h-12 items-center gap-2 bg-black px-5 py-3 text-sm font-black uppercase tracking-wide text-white shadow-neo-sm">
-                        VIEW PROJECT <ArrowUpRight size={20} strokeWidth={4} />
-                      </button>
                     )}
                   </div>
                 </article>

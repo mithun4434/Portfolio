@@ -497,7 +497,7 @@ section:nth-of-type(odd) {
 }
 
 .animated-section {
-  scroll-margin-top: 92px;
+  scroll-margin-top: 0;
   isolation: isolate;
 }
 
@@ -613,7 +613,7 @@ section:nth-of-type(odd) {
   75% { transform: translateX(-3px) rotate(-1deg); }
 }
 
-/* Custom cursor: intentionally blocky and high-contrast. */
+/* Custom cursor: GO appears only while hovering a real interactive control. */
 .custom-cursor {
   position: fixed;
   z-index: 9999;
@@ -979,4 +979,13 @@ textarea.neo-input {
 @media (prefers-reduced-motion: reduce) {
   .hero-bot-button, .status-dot.is-on, .cv-modal { animation: none !important; }
   .hero-bot-button:hover, .hero-bot-button:focus-visible { transform: none; }
+}
+
+/* Project actions stay compact and consistent across every project card. */
+.project-card .neo-button {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  align-self: flex-start;
 }

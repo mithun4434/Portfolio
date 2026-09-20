@@ -59,6 +59,16 @@ const projects = [
     stack: ["React", "Vite", "TypeScript", "Tailwind"],
     color: "white",
   },
+  {
+    number: "05",
+    title: "PYLOGIC",
+    type: "EDUCATION / PYTHON",
+    description:
+      "An interactive Python learning experience presented as a visual journey through core programming concepts.",
+    stack: ["Python", "Web", "Interactive Learning"],
+    color: "yellow",
+    link: "https://pylogic.vercel.app/",
+  },
 ];
 
 const skills = [
@@ -557,9 +567,20 @@ $ status
                         </span>
                       ))}
                     </div>
-                    <button className="neo-button mt-8 flex min-h-12 items-center gap-2 bg-black px-5 py-3 text-sm font-black uppercase tracking-wide text-white shadow-neo-sm">
-                      VIEW PROJECT <ArrowUpRight size={20} strokeWidth={4} />
-                    </button>
+                    {project.link ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="neo-button mt-8 flex min-h-12 items-center gap-2 bg-black px-5 py-3 text-sm font-black uppercase tracking-wide text-white shadow-neo-sm"
+                      >
+                        VIEW PROJECT <ArrowUpRight size={20} strokeWidth={4} />
+                      </a>
+                    ) : (
+                      <button className="neo-button mt-8 flex min-h-12 items-center gap-2 bg-black px-5 py-3 text-sm font-black uppercase tracking-wide text-white shadow-neo-sm">
+                        VIEW PROJECT <ArrowUpRight size={20} strokeWidth={4} />
+                      </button>
+                    )}
                   </div>
                 </article>
               ))}
